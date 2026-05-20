@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weekly Claw - Grok arrive dans OpenClaw</title>
+  <style>
+    :root{
+      --bg:#030507;
+      --bg2:#081018;
+      --panel:#0b1118;
+      --panel2:#101923;
+      --text:#f7fbff;
+      --muted:#9bb3c9;
+      --line:rgba(255,255,255,.13);
+      --x:#f7fbff;
+      --grok:#19d3ff;
+      --green:#71f6a8;
+      --hot:#ff4d8d;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--text);
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 16% 8%, rgba(25,211,255,.28), transparent 28%),
+        radial-gradient(circle at 84% 16%, rgba(255,77,141,.18), transparent 24%),
+        linear-gradient(135deg,var(--bg),var(--bg2) 58%,#031820);
+      overflow:hidden;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.14;
+      background-image:
+        linear-gradient(rgba(255,255,255,.13) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.13) 1px, transparent 1px);
+      background-size:58px 58px;
+      mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 88%);
+    }
+    .app{height:100vh;display:grid;grid-template-rows:auto auto 1fr auto;padding:22px 28px;gap:14px;position:relative}
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand h1{margin:0;font-size:34px;letter-spacing:-.04em}
+    .brand p{margin:6px 0 0;color:var(--muted);font-size:15px}
+    .top-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .counter,.clock{color:var(--muted);font-weight:850;border:1px solid var(--line);padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.045);backdrop-filter:blur(12px)}
+    .clock strong{color:#fff}.clock .ok{color:var(--green)}.clock .warn{color:#ffd45f}.clock .late{color:#ff6b7a}
+    .ticker{display:flex;gap:8px;align-items:center;justify-content:center;padding:10px 12px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.045);overflow:hidden}
+    .ticker span{color:var(--grok);font-weight:950;white-space:nowrap}
+    .ticker a{color:#fff;text-decoration:none;font-weight:850;font-size:14px;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid var(--line);white-space:nowrap}
+    .ticker a:hover{background:rgba(25,211,255,.18)}
+    .stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:0}
+    .card{
+      width:min(1080px,100%);
+      min-height:58vh;
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:linear-gradient(180deg,rgba(16,25,35,.96),rgba(7,12,17,.98));
+      box-shadow:0 30px 90px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.08);
+      padding:46px;
+      display:none;
+      animation:slide .22s ease-out;
+      position:relative;
+      overflow:hidden;
+    }
+    .card:after{
+      content:"X";
+      position:absolute;
+      right:28px;
+      bottom:-28px;
+      color:rgba(255,255,255,.035);
+      font-size:210px;
+      font-weight:950;
+      line-height:.8;
+      pointer-events:none;
+    }
+    .card.active{display:block}
+    @keyframes slide{from{opacity:.2;transform:translateX(25px)}to{opacity:1;transform:translateX(0)}}
+    .time{display:inline-block;background:linear-gradient(90deg,var(--x),var(--grok));color:#02070a;font-weight:950;border-radius:999px;padding:8px 13px;margin-bottom:18px}
+    h2{font-size:50px;line-height:.98;margin:0 0 20px;letter-spacing:-.05em;max-width:860px}
+    p,li{font-size:25px;line-height:1.38}
+    ul{margin:18px 0 0;padding-left:28px}
+    .lead{max-width:870px;color:#dcecff}
+    .question{margin-top:26px;padding:22px 24px;border-radius:18px;background:rgba(25,211,255,.12);border-left:6px solid var(--grok);font-size:30px;font-weight:950;line-height:1.22;max-width:920px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+    .mini{padding:20px;border-radius:16px;background:rgba(255,255,255,.055);border:1px solid var(--line);min-height:142px}
+    .mini b{display:block;color:#fff;font-size:21px;margin-bottom:8px}
+    .mini span{color:var(--muted);font-size:18px;line-height:1.35;display:block}
+    .pill{display:inline-flex;align-items:center;gap:8px;color:#02070a;background:var(--green);font-weight:950;border-radius:999px;padding:7px 10px;margin:0 8px 8px 0;font-size:14px}
+    .hero-actions{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+    button{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.08);color:#fff;border-radius:16px;padding:15px 22px;font-size:20px;font-weight:950}
+    button:hover{background:rgba(25,211,255,.16)}
+    .primary-cta{border:0;background:linear-gradient(90deg,var(--x),var(--grok));color:#02070a;box-shadow:0 14px 34px rgba(25,211,255,.18)}
+    .controls{display:flex;align-items:center;justify-content:center;gap:16px}
+    .dots{display:flex;gap:7px}.dot{width:10px;height:10px;border-radius:99px;background:rgba(255,255,255,.25);cursor:pointer}.dot.active{background:var(--grok);width:30px}
+    .hint{position:fixed;right:22px;bottom:18px;color:rgba(255,255,255,.45);font-size:13px}
+    .matrix{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:18px;line-height:1.5;color:#b8f7ff;background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:20px;max-width:850px}
+    .matrix strong{color:#fff}
+    .run{display:grid;grid-template-columns:150px minmax(0,1fr);gap:14px;margin-top:20px;max-width:900px}
+    .run div{padding:16px 18px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.05)}
+    .run b{color:var(--grok);font-size:18px}.run span{display:block;margin-top:4px;color:var(--muted);font-size:17px;line-height:1.35}
+    .resources{grid-template-columns:repeat(4,1fr)}
+    .resources .mini{min-height:126px}
+    .links a{display:inline-block;margin:10px 8px 0 0;padding:11px 13px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:#fff;text-decoration:none;font-weight:850;font-size:14px}
+    .links a:hover{background:rgba(25,211,255,.18)}
+    @media(max-width:900px){body{overflow:auto}.app{height:auto}.card{min-height:auto;padding:28px}h2{font-size:36px}p,li{font-size:20px}.question{font-size:23px}.grid,.resources{grid-template-columns:1fr}.run{grid-template-columns:1fr}.controls{position:sticky;bottom:0;background:rgba(3,5,7,.86);padding:12px}.ticker{justify-content:flex-start;overflow:auto}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <h1>Weekly Claw Geneva</h1>
+        <p>Grok x OpenClaw · mercredi 20 mai · 20h · Discord</p>
+      </div>
+      <div class="top-right">
+        <div class="clock">Heure : <strong id="clockNow">--:--</strong></div>
+        <div class="clock">Timing : <strong id="timingStatus">avant meetup</strong></div>
+        <div class="counter"><span id="current">1</span> / <span id="total">7</span></div>
+      </div>
+    </header>
+
+    <div class="ticker" id="contextLinks"></div>
+
+    <main class="stage">
+      <section class="card active">
+        <span class="time">20:00 - 20:05</span>
+        <h2>Ton agent local vient de se connecter à X.</h2>
+        <p class="lead">xAI annonce l’intégration native de Grok dans OpenClaw : OAuth, X Premium ou SuperGrok, puis l’agent local peut utiliser Grok sans clé API.</p>
+        <div>
+          <span class="pill">OAuth</span><span class="pill">Grok</span><span class="pill">X temps réel</span><span class="pill">Agent local</span>
+        </div>
+        <div class="question">“Et si l’IA locale avait enfin les yeux sur le monde en temps réel ?”</div>
+        <div class="hero-actions"><button class="primary-cta" onclick="show(2)">Voir le game changer</button><button onclick="show(cards.length-1)">Ressources</button></div>
+      </section>
+
+      <section class="card">
+        <span class="time">20:05 - 20:15</span>
+        <h2>Ce que l’intégration débloque</h2>
+        <div class="grid">
+          <div class="mini"><b>Discuter avec Grok</b><span>Pas de clé API à gérer. Connexion via ton compte X Premium ou SuperGrok.</span></div>
+          <div class="mini"><b>Images et vidéos</b><span>L’agent local peut déclencher des générations multimodales directement depuis OpenClaw.</span></div>
+          <div class="mini"><b>Scanner X</b><span>Posts, signaux, tendances et conversations peuvent devenir du contexte exploitable.</span></div>
+        </div>
+        <div class="question">“La vraie valeur, ce n’est pas juste Grok. C’est Grok branché à un agent qui agit.”</div>
+      </section>
+
+      <section class="card">
+        <span class="time">20:15 - 20:30</span>
+        <h2>Pourquoi c’est un game changer</h2>
+        <p class="lead">OpenClaw garde l’agent sur ta machine. Grok ajoute la couche vivante : X, les posts, les signaux faibles, le flux social en temps réel.</p>
+        <div class="matrix">
+          <strong>Avant</strong> : agent local puissant, mais contexte web/social limité.<br>
+          <strong>Maintenant</strong> : agent local + OAuth + Grok + X en direct.<br>
+          <strong>Résultat</strong> : veille, génération, analyse et actions depuis un cockpit que tu contrôles.
+        </div>
+        <div class="question">“Tes données restent sous contrôle, mais ton agent n’est plus aveugle.”</div>
+      </section>
+
+      <section class="card">
+        <span class="time">20:30 - 20:45</span>
+        <h2>Le point souveraineté</h2>
+        <p class="lead">Le sujet n’est pas de tout faire offline. Le sujet, c’est de décider ce qui reste local, ce qui sort, et sous quelle identité.</p>
+        <div class="grid">
+          <div class="mini"><b>Prompts locaux</b><span>OpenClaw orchestre depuis ta machine, avec fichiers, mémoire et workflows sous ton contrôle.</span></div>
+          <div class="mini"><b>OAuth plutôt qu’API key</b><span>Moins de friction pour les utilisateurs X Premium et SuperGrok.</span></div>
+          <div class="mini"><b>Contexte mondial</b><span>X devient une source de signaux pour ton agent, pas juste une app à scroller.</span></div>
+        </div>
+        <div class="question">“Souveraineté ne veut pas dire isolement. Ça veut dire contrôle.”</div>
+      </section>
+
+      <section class="card">
+        <span class="time">20:45 - 21:00</span>
+        <h2>Use cases à tester ce soir</h2>
+        <div class="run">
+          <div><b>Veille live</b><span>Scanner X autour d’un sujet, résumer les signaux utiles, ignorer le bruit.</span></div>
+          <div><b>Content engine</b><span>Transformer une tendance en post LinkedIn, thread X, image ou script vidéo.</span></div>
+          <div><b>Recherche marché</b><span>Repérer douleurs, objections et concurrents à partir des conversations publiques.</span></div>
+          <div><b>Agent multimodal</b><span>Demander une image ou une vidéo comme étape d’un workflow local.</span></div>
+        </div>
+        <div class="question">“Le meilleur test : partir d’un vrai signal X et finir avec un livrable utile.”</div>
+      </section>
+
+      <section class="card">
+        <span class="time">21:00 - 21:15</span>
+        <h2>Débat ouvert</h2>
+        <div class="question">“Est-ce que X devient la meilleure source temps réel pour les agents personnels ?”</div>
+        <div class="question">“OAuth rend-il les agents plus accessibles que les API keys ?”</div>
+        <div class="question">“Qu’est-ce qu’on accepte d’envoyer à Grok, et qu’est-ce qui doit rester local ?”</div>
+      </section>
+
+      <section class="card">
+        <span class="time">Ressources</span>
+        <h2>Liens pour la session</h2>
+        <p class="lead">À ouvrir pendant le live pour garder le rythme et éviter les détours.</p>
+        <div class="grid resources">
+          <div class="mini"><b>OpenClaw</b><span>Agent local et cockpit de la session.</span><div class="links"><a href="https://openclaw.ai/" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>Docs OpenClaw</b><span>Installation, agents, tools, channels.</span><div class="links"><a href="https://docs.openclaw.ai/" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>xAI</b><span>Actu et produits Grok.</span><div class="links"><a href="https://x.ai/" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>Grok</b><span>Accès via X / SuperGrok.</span><div class="links"><a href="https://grok.com/" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>X Premium</b><span>Abonnement X côté utilisateur.</span><div class="links"><a href="https://premium.x.com/" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>OpenClaw Geneva</b><span>Communauté et sessions Weekly Claw.</span><div class="links"><a href="https://discord.com/" target="_blank">Discord</a></div></div>
+          <div class="mini"><b>Angle content</b><span>Post court, use case concret, CTA Discord.</span></div>
+          <div class="mini"><b>CTA</b><span>Weekly Claw ce soir, 20h sur Discord.</span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="controls">
+      <button onclick="prevCard()">← Précédent</button>
+      <div class="dots" id="dots"></div>
+      <button onclick="nextCard()">Suivant →</button>
+    </footer>
+  </div>
+  <div class="hint">Flèches clavier ← → aussi disponibles</div>
+  <script>
+    const cards=[...document.querySelectorAll('.card')];
+    const dots=document.getElementById('dots');
+    const current=document.getElementById('current');
+    const contextLinks=document.getElementById('contextLinks');
+    const linksByCard=[
+      [{label:'OpenClaw',url:'https://openclaw.ai/'},{label:'Grok',url:'https://grok.com/'},{label:'X Premium',url:'https://premium.x.com/'}],
+      [{label:'xAI',url:'https://x.ai/'},{label:'Grok',url:'https://grok.com/'},{label:'OpenClaw Docs',url:'https://docs.openclaw.ai/'}],
+      [{label:'OpenClaw',url:'https://openclaw.ai/'},{label:'X',url:'https://x.com/'},{label:'xAI',url:'https://x.ai/'}],
+      [{label:'Docs OpenClaw',url:'https://docs.openclaw.ai/'},{label:'X Premium',url:'https://premium.x.com/'}],
+      [{label:'X Search',url:'https://x.com/search'},{label:'Grok',url:'https://grok.com/'}],
+      [{label:'OpenClaw Geneva Discord',url:'https://discord.com/'}],
+      [{label:'OpenClaw',url:'https://openclaw.ai/'},{label:'xAI',url:'https://x.ai/'},{label:'Grok',url:'https://grok.com/'},{label:'X Premium',url:'https://premium.x.com/'}]
+    ];
+    const schedule=[
+      {start:'20:00',end:'20:05'},
+      {start:'20:05',end:'20:15'},
+      {start:'20:15',end:'20:30'},
+      {start:'20:30',end:'20:45'},
+      {start:'20:45',end:'21:00'},
+      {start:'21:00',end:'21:15'},
+      {start:null,end:null}
+    ];
+    document.getElementById('total').textContent=cards.length;
+    let index=0;
+    cards.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' active':'');d.onclick=()=>show(i);dots.appendChild(d)});
+    const dotEls=[...document.querySelectorAll('.dot')];
+    function minutes(t){const [h,m]=t.split(':').map(Number);return h*60+m;}
+    function updateClock(){
+      const now=new Date();
+      const nowMin=now.getHours()*60+now.getMinutes();
+      document.getElementById('clockNow').textContent=now.toLocaleTimeString('fr-CH',{hour:'2-digit',minute:'2-digit'});
+      const st=document.getElementById('timingStatus');
+      const slot=schedule[index];
+      if(!slot || !slot.start){st.textContent='hors timing';st.className='warn';return;}
+      const start=minutes(slot.start), end=slot.end?minutes(slot.end):null;
+      if(nowMin<start){st.textContent='dans '+(start-nowMin)+' min';st.className='ok';}
+      else if(end && nowMin<=end){st.textContent='reste '+(end-nowMin)+' min';st.className=(end-nowMin<=2?'warn':'ok');}
+      else if(end){st.textContent='retard '+(nowMin-end)+' min';st.className='late';}
+      else {st.textContent='after';st.className='ok';}
+    }
+    setInterval(updateClock,1000);
+    function renderLinks(){
+      const links=linksByCard[index]||[];
+      contextLinks.innerHTML='<span>Liens utiles :</span>';
+      if(!links.length){contextLinks.innerHTML+='<span>Focus discussion.</span>';return;}
+      links.forEach(l=>{const a=document.createElement('a');a.href=l.url;a.target='_blank';a.textContent=l.label;contextLinks.appendChild(a);});
+    }
+    function show(i){
+      index=(i+cards.length)%cards.length;
+      cards.forEach((c,n)=>c.classList.toggle('active',n===index));
+      dotEls.forEach((d,n)=>d.classList.toggle('active',n===index));
+      current.textContent=index+1;
+      renderLinks();
+      updateClock();
+    }
+    function nextCard(){show(index+1)}
+    function prevCard(){show(index-1)}
+    window.addEventListener('keydown',e=>{if(e.key==='ArrowRight')nextCard(); if(e.key==='ArrowLeft')prevCard();});
+    renderLinks();
+    updateClock();
+  </script>
+</body>
+</html>
