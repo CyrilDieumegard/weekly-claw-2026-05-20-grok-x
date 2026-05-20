@@ -107,7 +107,23 @@
     .resources .mini{min-height:126px}
     .links a{display:inline-block;margin:10px 8px 0 0;padding:11px 13px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:#fff;text-decoration:none;font-weight:850;font-size:14px}
     .links a:hover{background:rgba(25,211,255,.18)}
-    @media(max-width:900px){body{overflow:auto}.app{height:auto}.card{min-height:auto;padding:28px}h2{font-size:36px}p,li{font-size:20px}.question{font-size:23px}.grid,.resources{grid-template-columns:1fr}.run{grid-template-columns:1fr}.controls{position:sticky;bottom:0;background:rgba(3,5,7,.86);padding:12px}.ticker{justify-content:flex-start;overflow:auto}}
+    .transcript-card{padding:32px;min-height:58vh;max-height:68vh;overflow:hidden}
+    .transcript-card:after{content:"REPLAY";font-size:132px;right:18px;bottom:-12px}
+    .transcript-card h2{font-size:38px;margin-bottom:10px}
+    .transcript-card p{font-size:18px;margin:0;color:var(--muted)}
+    .transcript-layout{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(320px,.82fr);gap:18px;margin-top:18px;min-height:0}
+    .panel{border:1px solid var(--line);border-radius:20px;background:rgba(0,0,0,.22);overflow:hidden;min-height:0}
+    .panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.045)}
+    .panel-head b{color:var(--grok);font-size:17px}.panel-head span{color:var(--muted);font-size:13px}
+    .tabs{display:flex;gap:8px}.tab{cursor:pointer;border:1px solid var(--line);border-radius:999px;padding:8px 11px;background:rgba(255,255,255,.06);color:#fff;font-size:13px;font-weight:950}.tab.active{background:linear-gradient(90deg,var(--x),var(--grok));color:#02070a}
+    .side-content{height:38vh;overflow:auto;padding:14px 16px;scrollbar-width:thin}
+    .person{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08)}.person:last-child{border-bottom:0}.person h3{margin:0 0 6px;font-size:18px;color:#fff}.person p{font-size:14px;line-height:1.35;margin:6px 0;color:var(--text)}.person ul{margin:8px 0 0;padding-left:18px}.person li{font-size:13px;color:var(--muted);line-height:1.3}
+    .summary-block h3{font-size:18px;margin:0 0 10px;color:var(--grok)}.summary-block ul{margin:0 0 16px;padding-left:18px}.summary-block li{font-size:14px;line-height:1.35;color:var(--text);margin:6px 0}
+    .transcript-box{height:38vh;overflow:auto;border:1px solid var(--line);border-radius:20px;background:rgba(0,0,0,.22);padding:10px 16px;scrollbar-width:thin}
+    .cue{display:grid;grid-template-columns:96px 130px minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+    .cue:last-child{border-bottom:0}.cue time{color:var(--grok);font-weight:950;font-size:13px;white-space:nowrap}.cue .speaker{color:#fff;font-weight:950;font-size:14px;overflow:hidden;text-overflow:ellipsis}.cue span{color:var(--text);font-size:15px;line-height:1.32;overflow-wrap:anywhere}
+    .transcript-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.transcript-actions a{display:inline-block;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:#fff;text-decoration:none;font-weight:850;font-size:14px}.transcript-actions a:hover{background:rgba(25,211,255,.18)}
+    @media(max-width:900px){body{overflow:auto}.app{height:auto}.card{min-height:auto;padding:28px}h2{font-size:36px}p,li{font-size:20px}.question{font-size:23px}.grid,.resources{grid-template-columns:1fr}.run{grid-template-columns:1fr}.transcript-layout{grid-template-columns:1fr}.transcript-card{max-height:none}.transcript-box,.side-content{height:44vh}.cue{grid-template-columns:82px 1fr}.cue span{grid-column:1 / -1}.controls{position:sticky;bottom:0;background:rgba(3,5,7,.86);padding:12px}.ticker{justify-content:flex-start;overflow:auto}}
   </style>
 </head>
 <body>
@@ -120,7 +136,7 @@
       <div class="top-right">
         <div class="clock">Heure : <strong id="clockNow">--:--</strong></div>
         <div class="clock">Timing : <strong id="timingStatus">avant meetup</strong></div>
-        <div class="counter"><span id="current">1</span> / <span id="total">8</span></div>
+        <div class="counter"><span id="current">1</span> / <span id="total">9</span></div>
       </div>
     </header>
 
@@ -205,6 +221,29 @@
         <div class="question">“Qu’est-ce qu’on accepte d’envoyer à Grok, et qu’est-ce qui doit rester local ?”</div>
       </section>
 
+      <section class="card transcript-card">
+        <span class="time">Replay</span>
+        <h2>Replay enrichi : Grok, n8n, Apify, LocalClaw</h2>
+        <p>Transcript Craig traité : 1h50, 829 segments utiles, profils et résumé intégrés comme les sessions précédentes.</p>
+        <div class="transcript-layout">
+          <div>
+            <div class="transcript-box" id="transcriptBox"><p>Chargement du transcript...</p></div>
+            <div class="transcript-actions">
+              <a href="speaker_transcript_2026-05-20.md" target="_blank">Transcript clean</a>
+              <a href="session-summary-2026-05-20.md" target="_blank">Résumé complet</a>
+              <a href="transcript-weekly-claw-2026-05-20.srt" target="_blank">SRT brut</a>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head">
+              <div><b>Session traitée</b><span>Participants + points clés</span></div>
+              <div class="tabs"><button class="tab active" id="tabPeople" onclick="showReplayTab('people')">Participants</button><button class="tab" id="tabSummary" onclick="showReplayTab('summary')">Résumé</button></div>
+            </div>
+            <div class="side-content" id="replaySide"></div>
+          </div>
+        </div>
+      </section>
+
       <section class="card">
         <span class="time">Ressources</span>
         <h2>Liens pour la session</h2>
@@ -215,9 +254,13 @@
           <div class="mini"><b>xAI</b><span>Actu et produits Grok.</span><div class="links"><a href="https://x.ai/" target="_blank">Ouvrir</a></div></div>
           <div class="mini"><b>Grok</b><span>Accès via X / SuperGrok.</span><div class="links"><a href="https://grok.com/" target="_blank">Ouvrir</a></div></div>
           <div class="mini"><b>X Premium</b><span>Abonnement X côté utilisateur.</span><div class="links"><a href="https://premium.x.com/" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>n8n</b><span>Workflows auto-hébergeables avec OpenClaw.</span><div class="links"><a href="https://github.com/n8n-io/n8n" target="_blank">GitHub</a></div></div>
+          <div class="mini"><b>Apify</b><span>Scraping LinkedIn, X, jobs, concurrents et prospects.</span><div class="links"><a href="https://apify.com/" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>LM Studio</b><span>Modèles locaux pour réduire tokens et garder la main.</span><div class="links"><a href="https://lmstudio.ai/" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>Infomaniak</b><span>Débat souveraineté, fondation et données en Suisse.</span><div class="links"><a href="https://www.infomaniak.com/" target="_blank">Ouvrir</a></div></div>
           <div class="mini"><b>OpenClaw Geneva</b><span>Communauté et sessions Weekly Claw.</span><div class="links"><a href="https://discord.com/" target="_blank">Discord</a></div></div>
-          <div class="mini"><b>Angle content</b><span>Post court, use case concret, CTA Discord.</span></div>
-          <div class="mini"><b>CTA</b><span>Weekly Claw ce soir, 20h sur Discord.</span></div>
+          <div class="mini"><b>Résumé session</b><span>Synthèse de la soirée et follow-ups.</span><div class="links"><a href="session-summary-2026-05-20.md" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>Transcript</b><span>Transcript clean traité depuis Craig.</span><div class="links"><a href="speaker_transcript_2026-05-20.md" target="_blank">Ouvrir</a></div></div>
         </div>
       </section>
     </main>
@@ -242,6 +285,7 @@
       [{label:'Docs OpenClaw',url:'https://docs.openclaw.ai/'},{label:'X Premium',url:'https://premium.x.com/'}],
       [{label:'X Search',url:'https://x.com/search'},{label:'Grok',url:'https://grok.com/'}],
       [{label:'OpenClaw Geneva Discord',url:'https://discord.com/'}],
+      [{label:'Transcript clean',url:'speaker_transcript_2026-05-20.md'},{label:'Résumé complet',url:'session-summary-2026-05-20.md'},{label:'SRT brut',url:'transcript-weekly-claw-2026-05-20.srt'}],
       [{label:'OpenClaw',url:'https://openclaw.ai/'},{label:'xAI',url:'https://x.ai/'},{label:'Grok',url:'https://grok.com/'},{label:'X Premium',url:'https://premium.x.com/'}]
     ];
     const schedule=[
@@ -252,6 +296,7 @@
       {start:'20:40',end:'20:55'},
       {start:'20:55',end:'21:10'},
       {start:'21:10',end:'21:20'},
+      {start:null,end:null},
       {start:null,end:null}
     ];
     document.getElementById('total').textContent=cards.length;
@@ -292,6 +337,57 @@
     window.addEventListener('keydown',e=>{if(e.key==='ArrowRight')nextCard(); if(e.key==='ArrowLeft')prevCard();});
     renderLinks();
     updateClock();
+
+    function escapeHtml(str){return str.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+    async function loadTranscript(){
+      const box=document.getElementById('transcriptBox');
+      if(!box) return;
+      try{
+        const res=await fetch('speaker_transcript_2026-05-20.md?v=20260520b');
+        const text=await res.text();
+        const lines=text.split(/\n/);
+        const cues=[];
+        for(let i=0;i<lines.length;i++){
+          const m=lines[i].match(/^\*\*\[(.*?)\]\s+(.+?)\*\*\s*$/);
+          if(!m) continue;
+          let body=[];
+          i++;
+          while(i<lines.length && !lines[i].match(/^\*\*\[/)){
+            const line=lines[i].trim();
+            if(line) body.push(line);
+            i++;
+          }
+          i--;
+          const time=m[1].split(' --> ')[0];
+          const speaker=m[2];
+          const content=body.join(' ');
+          if(content) cues.push({time,speaker,content});
+        }
+        box.innerHTML=cues.map(c=>`<div class="cue"><time>${escapeHtml(c.time)}</time><b class="speaker">${escapeHtml(c.speaker)}</b><span>${escapeHtml(c.content)}</span></div>`).join('') || '<p>Aucun segment trouvé.</p>';
+      }catch(e){box.innerHTML='<p>Impossible de charger le transcript clean.</p>';}
+    }
+
+    let meetupData=null;
+    async function loadMeetupData(){
+      try{
+        const res=await fetch('meetup_summary_profiles_2026-05-20.json?v=20260520b');
+        meetupData=await res.json();
+        showReplayTab('people');
+      }catch(e){const el=document.getElementById('replaySide'); if(el) el.innerHTML='<p>Impossible de charger les profils.</p>';}
+    }
+    function showReplayTab(kind){
+      const side=document.getElementById('replaySide'); if(!side || !meetupData) return;
+      document.getElementById('tabPeople')?.classList.toggle('active',kind==='people');
+      document.getElementById('tabSummary')?.classList.toggle('active',kind==='summary');
+      if(kind==='people'){
+        side.innerHTML=meetupData.participants.map(p=>`<article class="person"><h3>${escapeHtml(p.displayName||p.speaker)}</h3><p>${escapeHtml(p.profileSummary||'Profil non précisé.')}</p>${p.activities?.length?`<ul>${p.activities.slice(0,4).map(a=>`<li>${escapeHtml(a)}</li>`).join('')}</ul>`:''}${p.lookingFor?`<p><b>Recherche :</b> ${escapeHtml(p.lookingFor)}</p>`:''}</article>`).join('');
+      }else{
+        const m=meetupData.meetupSummary;
+        side.innerHTML=`<div class="summary-block"><h3>${escapeHtml(m.title)}</h3><ul>${m.bullets.map(b=>`<li>${escapeHtml(b)}</li>`).join('')}</ul><h3>Topics clés</h3><ul>${m.keyTopics.slice(0,16).map(t=>`<li>${escapeHtml(t)}</li>`).join('')}</ul><h3>Follow-up</h3><ul>${m.followUps.map(f=>`<li>${escapeHtml(f)}</li>`).join('')}</ul></div>`;
+      }
+    }
+    loadMeetupData();
+    loadTranscript();
   </script>
 </body>
 </html>

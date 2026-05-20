@@ -1,0 +1,145 @@
+{
+  "participants": [
+    {
+      "displayName": "Redsun / Cyril",
+      "speaker": "Redsun",
+      "profileSummary": "Hôte Weekly Claw Geneva. Présente OpenClaw, LocalClaw, l’intégration Grok/xAI, les usages Apify, n8n, cron jobs et les arbitrages souveraineté/local/cloud.",
+      "activities": [
+        "Développe LocalClaw pour simplifier OpenClaw sur Mac",
+        "Anime la communauté OpenClaw Geneva",
+        "Teste les workflows agents locaux, scraping, cron jobs et modèles locaux"
+      ],
+      "lookingFor": "Faire progresser la communauté, connecter les profils utiles, simplifier l’accès à OpenClaw."
+    },
+    {
+      "displayName": "Mokhles",
+      "speaker": "Mokhles",
+      "profileSummary": "Travaille dans la finance, responsable banking relationships / treasury / tax assets management. Intéressé par IA, n8n, automatisation et workflows.",
+      "activities": [
+        "Utilise n8n au travail",
+        "Possède un Mac mini",
+        "A installé OpenClaw récemment",
+        "Veut tester des workflows créés avec OpenClaw"
+      ],
+      "lookingFor": "Comprendre comment connecter n8n, OpenClaw et modèles locaux sur sa machine."
+    },
+    {
+      "displayName": "David / Omexis",
+      "speaker": "Omexis_David",
+      "profileSummary": "Ancien IT manager en Big Pharma, lance une société d’audit pour PME et médecins autour des process, résilience opérationnelle et IT.",
+      "activities": [
+        "Construit une méthode d’audit en 7 dimensions",
+        "Veut créer des agents spécialisés pour industrialiser ses audits",
+        "Cherche une stack full local / Suisse pour données médicales sensibles",
+        "Débute sur OpenClaw avec l’aide de Maxime Grenu"
+      ],
+      "lookingFor": "Mettre en place des agents d’audit fiables, locaux, sécurisés et standardisés."
+    },
+    {
+      "displayName": "Philippe Chartois",
+      "speaker": "pchartois",
+      "profileSummary": "Organise des meetups IA à Genève. Travaille sur des outils de communication, templates, back-offices et automatisation semi-validée.",
+      "activities": [
+        "Meetup IA Genève prévu le 17 juin sur safety by design",
+        "Explore des templates de communication et workflows de contenu",
+        "Intéressé par X, Instagram, TikTok, Apify et publication semi-automatique"
+      ],
+      "lookingFor": "Structurer des workflows de communication automatisés mais validés humainement."
+    },
+    {
+      "displayName": "Gilles",
+      "speaker": "gilles",
+      "profileSummary": "Utilisateur de LocalClaw/OpenClaw, profil non développeur mais avancé dans l’adoption IA. Apporte des retours UX et des connexions business.",
+      "activities": [
+        "A installé LocalClaw et témoigne du gain de lisibilité",
+        "Utilise LM Studio pour limiter la consommation de tokens",
+        "Met David en relation avec un ancien auditeur",
+        "Discute souveraineté, cron jobs et données sensibles"
+      ],
+      "lookingFor": "Des outils OpenClaw plus simples, pratiques et fiables pour usages métier."
+    },
+    {
+      "displayName": "Gwen",
+      "speaker": "Gwen",
+      "profileSummary": "Intervient sur les sujets juridiques, données publiques, sécurité, data rooms locales, RAG et souveraineté des données.",
+      "activities": [
+        "Questionne l’usage de données publiques dans les métiers juridiques",
+        "Évoque les avocats, fusions-acquisitions et data rooms locales",
+        "Pousse la réflexion sur séparation données sensibles / sources publiques"
+      ],
+      "lookingFor": "Clarifier les architectures locales sûres pour usages juridiques et données sensibles."
+    },
+    {
+      "displayName": "Hebrius",
+      "speaker": "_Hebrius_",
+      "profileSummary": "Pose des questions sur coûts Apify, LinkedIn, LocalClaw, Hermès vs OpenClaw et hardware local.",
+      "activities": [
+        "Compare LinkedIn Pro et Apify pour prospection",
+        "Questionne Hermès versus LocalClaw/OpenClaw",
+        "S’intéresse aux machines locales et coûts d’infrastructure"
+      ],
+      "lookingFor": "Comprendre les meilleurs choix outils/coûts pour automatisation et IA locale."
+    },
+    {
+      "displayName": "Ryen",
+      "speaker": "Ryen",
+      "profileSummary": "Participe ponctuellement, notamment sur l’auto-hébergement de n8n et les workflows.",
+      "activities": [
+        "Confirme la possibilité d’auto-héberger n8n",
+        "Intervient sur les questions techniques locales"
+      ],
+      "lookingFor": "Suivre les options d’automatisation locale."
+    },
+    {
+      "displayName": "Patrick",
+      "speaker": "Patrick",
+      "profileSummary": "Participant arrivé en cours de session, suit la démonstration OpenClaw/LocalClaw.",
+      "activities": [
+        "Participe à la partie démonstration",
+        "Suit les échanges sur installation et agents"
+      ],
+      "lookingFor": "Découvrir les usages pratiques OpenClaw."
+    }
+  ],
+  "meetupSummary": {
+    "title": "Weekly Claw - Grok x OpenClaw, n8n local, Apify et souveraineté",
+    "bullets": [
+      "La session commence par le rituel de présentation des nouveaux : 30 secondes pour dire qui on est, son usage IA et son blocage.",
+      "Mokhles présente un profil finance intéressé par n8n, automatisation et OpenClaw sur Mac mini.",
+      "David présente son projet de société d’audit IT/process/résilience pour PME et médecins, avec besoin fort de confidentialité Suisse/local.",
+      "Discussion sur le combo OpenClaw + n8n auto-hébergé : OpenClaw peut installer et piloter n8n pour créer des workflows localement.",
+      "Le thème Grok/xAI est abordé : connexion OAuth avec X, accès à l’info fraîche, scraping/pull, et potentiel push/publication.",
+      "Apify est présenté comme pont puissant pour scraper LinkedIn, TikTok, Instagram, jobs, concurrents ou prospects via clé API.",
+      "Point de vigilance clair : éviter le posting automatique aveugle, risque de ban et contenu de faible qualité.",
+      "Discussion souveraineté : données médicales/juridiques, Infomaniak fondation, Proton, Open Data Suisse, RAG et machines locales isolées.",
+      "Démo LocalClaw : installer/mettre à jour OpenClaw, switch cloud/auth/local LLM, gérer projets, agents et cron jobs plus proprement.",
+      "Comparaison Hermès / OpenClaw : Hermès semble plus strict et structuré, mais moins convaincant en local et potentiellement plus gourmand en contexte.",
+      "Discussion hardware local : Mac mini, Mac Studio, NVIDIA DGX, coûts RAM et besoin croissant de machines dédiées."
+    ],
+    "keyTopics": [
+      "Grok dans OpenClaw",
+      "OAuth X / xAI",
+      "OpenClaw x n8n auto-hébergé",
+      "Audit IT pour médecins et PME",
+      "Données en Suisse / full local",
+      "Apify pour scraping LinkedIn, X, TikTok, Instagram",
+      "Cron jobs OpenClaw",
+      "LocalClaw UX",
+      "LM Studio et modèles locaux",
+      "RAG sur données publiques",
+      "Infomaniak fondation / Proton",
+      "Hermès vs OpenClaw",
+      "Mac Studio / NVIDIA DGX / hardware local",
+      "Prospection et jobs LinkedIn"
+    ],
+    "followUps": [
+      "Ajouter un one-click n8n dans LocalClaw.",
+      "Partager le lien GitHub n8n aux participants.",
+      "Tester la connexion Grok/xAI dans OpenClaw avec un participant X Premium ou SuperGrok.",
+      "Préparer un exemple Apify + OpenClaw pour LinkedIn jobs/prospection.",
+      "Mettre David en relation avec l’ancien auditeur mentionné par Gilles.",
+      "Documenter les architectures full local pour médecins / avocats / données sensibles.",
+      "Faire une prochaine démo plus structurée des agents et cron jobs dans LocalClaw."
+    ]
+  }
+}
