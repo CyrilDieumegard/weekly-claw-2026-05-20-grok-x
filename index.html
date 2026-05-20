@@ -135,11 +135,23 @@
           <span class="pill">OAuth</span><span class="pill">Grok</span><span class="pill">X temps réel</span><span class="pill">Agent local</span>
         </div>
         <div class="question">“Et si l’IA locale avait enfin les yeux sur le monde en temps réel ?”</div>
-        <div class="hero-actions"><button class="primary-cta" onclick="show(2)">Voir le game changer</button><button onclick="show(cards.length-1)">Ressources</button></div>
+        <div class="hero-actions"><button class="primary-cta" onclick="show(2)">Voir Grok x OpenClaw</button><button onclick="show(cards.length-1)">Ressources</button></div>
       </section>
 
       <section class="card">
         <span class="time">20:05 - 20:15</span>
+        <h2>30 secondes pour se présenter</h2>
+        <p class="lead">On garde le rituel des anciennes sessions : rapide, concret, utile pour créer des connexions dans la room.</p>
+        <div class="grid">
+          <div class="mini"><b>Qui tu es</b><span>Prénom, activité, projet du moment. Pas besoin de pitch parfait.</span></div>
+          <div class="mini"><b>Ton usage IA</b><span>ChatGPT, Claude, Grok, OpenClaw, local, automatisations ou simple curiosité.</span></div>
+          <div class="mini"><b>Ton blocage</b><span>Ce que tu veux comprendre, tester ou débloquer avec la communauté.</span></div>
+        </div>
+        <div class="question">“30 secondes chacun : qui es-tu, quelle IA tu utilises, et quel vrai problème tu veux résoudre ?”</div>
+      </section>
+
+      <section class="card">
+        <span class="time">20:15 - 20:25</span>
         <h2>Ce que l’intégration débloque</h2>
         <div class="grid">
           <div class="mini"><b>Discuter avec Grok</b><span>Pas de clé API à gérer. Connexion via ton compte X Premium ou SuperGrok.</span></div>
@@ -150,7 +162,7 @@
       </section>
 
       <section class="card">
-        <span class="time">20:15 - 20:30</span>
+        <span class="time">20:25 - 20:40</span>
         <h2>Pourquoi c’est un game changer</h2>
         <p class="lead">OpenClaw garde l’agent sur ta machine. Grok ajoute la couche vivante : X, les posts, les signaux faibles, le flux social en temps réel.</p>
         <div class="matrix">
@@ -162,7 +174,7 @@
       </section>
 
       <section class="card">
-        <span class="time">20:30 - 20:45</span>
+        <span class="time">20:40 - 20:55</span>
         <h2>Le point souveraineté</h2>
         <p class="lead">Le sujet n’est pas de tout faire offline. Le sujet, c’est de décider ce qui reste local, ce qui sort, et sous quelle identité.</p>
         <div class="grid">
@@ -174,7 +186,7 @@
       </section>
 
       <section class="card">
-        <span class="time">20:45 - 21:00</span>
+        <span class="time">20:55 - 21:10</span>
         <h2>Use cases à tester ce soir</h2>
         <div class="run">
           <div><b>Veille live</b><span>Scanner X autour d’un sujet, résumer les signaux utiles, ignorer le bruit.</span></div>
@@ -186,7 +198,7 @@
       </section>
 
       <section class="card">
-        <span class="time">21:00 - 21:15</span>
+        <span class="time">21:10 - 21:20</span>
         <h2>Débat ouvert</h2>
         <div class="question">“Est-ce que X devient la meilleure source temps réel pour les agents personnels ?”</div>
         <div class="question">“OAuth rend-il les agents plus accessibles que les API keys ?”</div>
@@ -224,6 +236,7 @@
     const contextLinks=document.getElementById('contextLinks');
     const linksByCard=[
       [{label:'OpenClaw',url:'https://openclaw.ai/'},{label:'Grok',url:'https://grok.com/'},{label:'X Premium',url:'https://premium.x.com/'}],
+      [{label:'OpenClaw Geneva Discord',url:'https://discord.com/'}],
       [{label:'xAI',url:'https://x.ai/'},{label:'Grok',url:'https://grok.com/'},{label:'OpenClaw Docs',url:'https://docs.openclaw.ai/'}],
       [{label:'OpenClaw',url:'https://openclaw.ai/'},{label:'X',url:'https://x.com/'},{label:'xAI',url:'https://x.ai/'}],
       [{label:'Docs OpenClaw',url:'https://docs.openclaw.ai/'},{label:'X Premium',url:'https://premium.x.com/'}],
@@ -234,10 +247,11 @@
     const schedule=[
       {start:'20:00',end:'20:05'},
       {start:'20:05',end:'20:15'},
-      {start:'20:15',end:'20:30'},
-      {start:'20:30',end:'20:45'},
-      {start:'20:45',end:'21:00'},
-      {start:'21:00',end:'21:15'},
+      {start:'20:15',end:'20:25'},
+      {start:'20:25',end:'20:40'},
+      {start:'20:40',end:'20:55'},
+      {start:'20:55',end:'21:10'},
+      {start:'21:10',end:'21:20'},
       {start:null,end:null}
     ];
     document.getElementById('total').textContent=cards.length;
